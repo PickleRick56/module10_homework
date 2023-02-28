@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="cat">click</button>
+    <script>
+        function siz(){
+           
+           alert(`Размер экрана без учёта полосы прокрутки: ${document.documentElement.clientWidth} X ${document.documentElement.clientHeight}`);
+      
+       }
+        let btn=document.getElementById('cat')
+        console.log(btn)
+        btn.addEventListener("click", siz, false);
+        
+    </script>
+</body>
+</html>
