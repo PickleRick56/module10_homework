@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+
+    <button id="sendMe">send</button>
+    <button id="geolocation">geolocation</button>
+    <div id="output"></div>
+
+    <script>
+        const wsUri = 'wss://echo-ws-service.herokuapp.com';
+        const button = document.querySelector('#sendMe');
+        const geolocationButton = document.querySelector('#geolocation');
+        let websocket;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            websocket = new WebSocket(wsUri);
+            websocket.onopen = function (evt) {
+                writeToScreen("CONNECTED");
+            }
+
+            websocket.onmessage = function (evt) {
+                writeToScreen(
+                    '<span style="color: blue;">RESPONSE: ' + evt.data + '</span>'
+                );
+            };
+        });
+
+
+
+        function writeToScreen(message) {
+            let pre = document.createElement("p");
+
+            pre.innerHTML = message;
+            output.appendChild(pre);
+        }
+
+
+
+        button.addEventListener('click',
+            () => {
+                console.log(document.querySelector('input').value);
+                websocket.send(document.querySelector('input').value);
+                writeToScreen(document.querySelector('input').value);
+            });
+
+        geolocationButton.addEventListener('click', () => {
+            let positon = navigator.geolocation.getCurrentPosition((position) => {
+                writeToScreen("Latitude: " + position.coords.latitude +
+                    "Longitude: " + position.coords.longitude);
+
+            });
+            
+
+        })
+    </script>
+
+</body>
+
+</html>
