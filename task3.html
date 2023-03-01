@@ -34,17 +34,12 @@
             };
         });
 
-
-
         function writeToScreen(message) {
             let pre = document.createElement("p");
 
             pre.innerHTML = message;
             output.appendChild(pre);
         }
-
-
-
         button.addEventListener('click',
             () => {
                 console.log(document.querySelector('input').value);
@@ -54,12 +49,10 @@
 
         geolocationButton.addEventListener('click', () => {
             let positon = navigator.geolocation.getCurrentPosition((position) => {
-                writeToScreen("Latitude: " + position.coords.latitude +
-                    "Longitude: " + position.coords.longitude);
-
+                writeToScreen(
+                    `<a href="https://www.openstreetmap.org/#map=9/${position.coords.latitude}/${position.coords.longitude}">geolocation</a>`
+                );
             });
-            
-
         })
     </script>
 
